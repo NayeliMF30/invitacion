@@ -20,7 +20,7 @@
 
         .sobrecom {
             position: absolute;
-            bottom: 250px;
+            bottom: 400px;
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
@@ -74,8 +74,8 @@
     position: fixed;
     top: 10px;
     right: 15px;
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
     opacity: 0.5; /* Ajusta la transparencia, 1 es opaco y 0 es completamente transparente */
 }
@@ -86,7 +86,6 @@
 
         /* Ocultar el video inicial al hacer clic en el sobre */
         #invideo {
-             
             display: none;
             width: 100%;
         }
@@ -98,29 +97,32 @@
     </style>
 
     <script>
+        
         // Función para hacer aparecer la imagen del sobre
         window.onload = function() {
             document.querySelector('.sobrecom').style.opacity = 1; // Hace visible el sobre
         }
-
+        let scrollPosition = 0;
         // Función para mostrar los botones de confirmación
-          function mostrarOpcionesConfirmacion() {
+        function mostrarOpcionesConfirmacion() {
             var confirmacionBtns = document.getElementById('confirmacionBtns');
         
         // Verifica si los botones están visibles
         if (confirmacionBtns.style.display === 'flex') {
             // Si están visibles, los oculta
             confirmacionBtns.style.display = 'none';
+            window.scrollTo({ top: scrollPosition, behavior: 'smooth' }); // Vuelve a la posición original
         } else {
-            // Si están ocultos, los muestra
+            // Si están ocultos, los muestra y guarda la posición actual
             confirmacionBtns.style.display = 'flex';
+            scrollPosition = window.pageYOffset; // Guarda la posición actual de desplazamiento
+            confirmacionBtns.scrollIntoView({ behavior: 'smooth' }); // Desplaza hacia los botones de confirmación
         }
-        }
-    
-
+    }
         // Función para redirigir a WhatsApp según el botón presionado y ocultar los botones
         function confirmarA(nombre) {
             document.getElementById('confirmacionBtns').style.display = 'none';
+            window.scrollTo({ top: scrollPosition, behavior: 'smooth' }); // Vuelve a la posición original
             if (nombre === 'nayeli') {
                 window.open('https://wa.me/5532359310?text=Hola!%20Confirmo%20mi%20asistencia', '_blank');
             } else if (nombre === 'david') {
@@ -189,6 +191,7 @@
             Tu navegador no soporta el elemento de video.
         </video>
         
+      
         <!-- Video que se mostrará al hacer clic en el sobre -->
         <video id="invideo" controls onended="regresarAPortada()">
             <source src="invideo.mp4" type="video/mp4">
@@ -203,6 +206,7 @@
                 <span>Confirmación</span>
             </button>
 
+           
             <!-- Botón de ubicación (Google Maps) -->
             <a href="https://maps.app.goo.gl/nyvg3cifDkp9WoXC7" class="btn-icon" target="_blank">
                 <img src="ubi.png" alt="Ubicación">
@@ -212,14 +216,17 @@
 
         <!-- Botones para confirmar a Nayeli o David -->
         <div id="confirmacionBtns">
-            <button class="confirmacion-btn btn btn-outline-primary" onclick="confirmarA('nayeli')">Confirma a Nayeli</button>
-            <button class="confirmacion-btn btn btn-outline-primary" onclick="confirmarA('david')">Confirma a David</button>
+            <button class="confirmacion-btn btn btn-success" onclick="confirmarA('nayeli')">Confirmar a Nayeli</button>
+            <button class="confirmacion-btn btn btn-success" onclick="confirmarA('david')">Confirmar a David</button>
         </div>
     </div>
 
-    <!-- Imagen del sobre con efecto de aparición -->
-        <img src="sobrecom.png" alt="Sobre" class="sobrecom img-fluid" onclick="reproducirVideo()">
+     <!-- Imagen del sobre con efecto de aparición -->
+     <img src="sobrecom.png" alt="Sobre" class="sobrecom img-fluid" onclick="reproducirVideo()">
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
 </body>
 </html>
