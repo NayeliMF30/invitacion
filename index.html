@@ -86,6 +86,7 @@
 
         /* Ocultar el video inicial al hacer clic en el sobre */
         #invideo {
+             position: absolute;
             display: none;
             width: 100%;
         }
@@ -137,7 +138,7 @@
             document.querySelector('.video-portada').style.display = 'none';
 
             // Muestra el nuevo video
-            document.getElementById('invideo').style.display = 'center';
+            document.getElementById('invideo').style.display = 'block';
             document.getElementById('invideo').play();
 
             // Oculta los botones de Confirmación, Ubicación y la imagen del sobre
