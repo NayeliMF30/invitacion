@@ -104,9 +104,18 @@
         }
 
         // Función para mostrar los botones de confirmación
-        function mostrarOpcionesConfirmacion() {
-            document.getElementById('confirmacionBtns').style.display = 'flex';
+          function mostrarOpcionesConfirmacion() {
+            var confirmacionBtns = document.getElementById('confirmacionBtns');
+        
+        // Verifica si los botones están visibles
+        if (confirmacionBtns.style.display === 'flex') {
+            // Si están visibles, los oculta
+            confirmacionBtns.style.display = 'none';
+        } else {
+            // Si están ocultos, los muestra
+            confirmacionBtns.style.display = 'flex';
         }
+    
 
         // Función para redirigir a WhatsApp según el botón presionado y ocultar los botones
         function confirmarA(nombre) {
