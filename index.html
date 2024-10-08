@@ -145,32 +145,56 @@
         }
 
         // Función para reproducir el video "invideo.mp4" al hacer clic en el sobre
-        function reproducirVideo() {
-            // Oculta el video de portada
-            document.querySelector('.video-portada').style.display = 'none';
+    function reproducirVideo() {
+        // Oculta el video de portada
+        document.querySelector('.video-portada').style.display = 'none';
 
-            // Muestra el nuevo video
-            document.getElementById('invideo').style.display = 'block';
-            document.getElementById('invideo').play();
+        // Muestra el nuevo video
+        var videoElement = document.getElementById('invideo');
+        videoElement.style.display = 'block';
+        videoElement.play();
 
-            // Oculta los botones de Confirmación, Ubicación y la imagen del sobre
-            document.querySelector('.btn-container').classList.add('hidden');
-            document.querySelector('.sobrecom').classList.add('hidden');
+        // Intenta abrir el video en pantalla completa
+        if (videoElement.requestFullscreen) {
+            videoElement.requestFullscreen();
+        } else if (videoElement.mozRequestFullScreen) { // Firefox
+            videoElement.mozRequestFullScreen();
+        } else if (videoElement.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+            videoElement.webkitRequestFullscreen();
+        } else if (videoElement.msRequestFullscreen) { // IE/Edge
+            videoElement.msRequestFullscreen();
         }
 
-        // Función que regresa al video de portada "inicio.mp4" al terminar "invideo.mp4"
-        function regresarAPortada() {
-            // Ocultar el video "invideo"
-            document.getElementById('invideo').style.display = 'none';
-            document.getElementById('invideo').pause();
+        // Oculta los botones de Confirmación, Ubicación y la imagen del sobre
+        document.querySelector('.btn-container').classList.add('hidden');
+        document.querySelector('.sobrecom').classList.add('hidden');
+    }
 
-            // Mostrar el video de portada de nuevo
-            document.querySelector('.video-portada').style.display = 'block';
+    // Función que regresa al video de portada "inicio.mp4" al terminar "invideo.mp4"
+    function regresarAPortada() {
+        // Ocultar el video "invideo"
+        var videoElement = document.getElementById('invideo');
+        videoElement.style.display = 'none';
+        videoElement.pause();
 
-            // Mostrar los botones de Confirmación y Ubicación nuevamente
-            document.querySelector('.btn-container').classList.remove('hidden');
-            document.querySelector('.sobrecom').classList.remove('hidden');
+        // Salir del modo pantalla completa
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) { // Firefox
+            document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) { // Chrome, Safari, and Opera
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { // IE/Edge
+            document.msExitFullscreen();
         }
+
+        // Mostrar el video de portada de nuevo
+        document.querySelector('.video-portada').style.display = 'block';
+
+        // Mostrar los botones de Confirmación y Ubicación nuevamente
+        document.querySelector('.btn-container').classList.remove('hidden');
+        document.querySelector('.sobrecom').classList.remove('hidden');
+    }
     </script>
 </head>
 <body>
