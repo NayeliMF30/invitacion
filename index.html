@@ -23,28 +23,22 @@
 
         .sobrecom {
             position: absolute;
-            bottom: 20%;
+            bottom: 20%; /* Ajustado para que quede centrado */
             left: 50%;
-            -webkit-transform: translateX(-50%);
-            -moz-transform: translateX(-50%);
-            -ms-transform: translateX(-50%);
             transform: translateX(-50%);
             width: 100%;
             max-width: 410px;
             cursor: pointer;
             opacity: 0;
-            -webkit-transition: opacity 2s ease-in;
-            -moz-transition: opacity 2s ease-in;
-            -ms-transition: opacity 2s ease-in;
             transition: opacity 2s ease-in;
         }
 
         .btn-container {
             margin-top: 20px;
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* Cambiado a columna para alinear verticalmente */
             align-items: center;
-            gap: 15px;
+            gap: 15px; /* Espacio entre los botones */
         }
 
         .btn-icon {
@@ -82,6 +76,7 @@
             cursor: pointer;
         }
 
+        /* Estilo para el botón de la bocina */
         .speaker-icon {
             position: fixed;
             top: 15px;
@@ -91,15 +86,18 @@
             cursor: pointer;
         }
 
+        /* Ocultar el video inicial al hacer clic en el sobre */
         #invideo {
             display: none;
             width: 100%;
         }
 
+        /* Ocultar los botones al reproducir el video */
         .btn-container.hidden, .sobrecom.hidden {
             display: none;
         }
 
+        /* Estilos responsivos */
         @media (max-width: 576px) {
             .sobrecom {
                 bottom: 10%;
@@ -128,14 +126,17 @@
     </style>
 
     <script>
+        // Función para hacer aparecer la imagen del sobre
         window.onload = function() {
-            document.querySelector('.sobrecom').style.opacity = 1;
+            document.querySelector('.sobrecom').style.opacity = 1; // Hace visible el sobre
         }
 
+        // Función para mostrar los botones de confirmación
         function mostrarOpcionesConfirmacion() {
             document.getElementById('confirmacionBtns').style.display = 'block';
         }
 
+        // Función para redirigir a WhatsApp según el botón presionado y ocultar los botones
         function confirmarA(nombre) {
             document.getElementById('confirmacionBtns').style.display = 'none';
             if (nombre === 'nayeli') {
@@ -145,31 +146,44 @@
             }
         }
 
+        // Función para alternar la reproducción de música
         function toggleMusic() {
             var audio = document.getElementById('background-audio');
             var speakerIcon = document.getElementById('speakerIcon');
 
             if (audio.paused) {
                 audio.play();
-                speakerIcon.src = "sonido.jpg";
+                speakerIcon.src = "sonido.jpg"; // Cambia a icono de sonido activado
             } else {
                 audio.pause();
-                speakerIcon.src = "silencio.jpg";
+                speakerIcon.src = "silencio.jpg"; // Cambia a icono de sonido desactivado
             }
         }
 
+        // Función para reproducir el video "invideo.mp4" al hacer clic en el sobre
         function reproducirVideo() {
+            // Oculta el video de portada
             document.querySelector('.video-portada').style.display = 'none';
+
+            // Muestra el nuevo video
             document.getElementById('invideo').style.display = 'block';
             document.getElementById('invideo').play();
+
+            // Oculta los botones de Confirmación, Ubicación y la imagen del sobre
             document.querySelector('.btn-container').classList.add('hidden');
             document.querySelector('.sobrecom').classList.add('hidden');
         }
 
+        // Función que regresa al video de portada "inicio.mp4" al terminar "invideo.mp4"
         function regresarAPortada() {
+            // Ocultar el video "invideo"
             document.getElementById('invideo').style.display = 'none';
             document.getElementById('invideo').pause();
+
+            // Mostrar el video de portada de nuevo
             document.querySelector('.video-portada').style.display = 'block';
+
+            // Mostrar los botones de Confirmación y Ubicación nuevamente
             document.querySelector('.btn-container').classList.remove('hidden');
             document.querySelector('.sobrecom').classList.remove('hidden');
         }
@@ -182,17 +196,14 @@
         <img src="silencio.jpg" alt="Control de sonido" class="speaker-icon" id="speakerIcon" onclick="toggleMusic()">
 
         <!-- Reproductor de audio -->
-        <audio id="background-audio" loop controls>
+        <audio id="background-audio" loop>
             <source src="./metallica.mp3" type="audio/mpeg">
-            <source src="./metallica.ogg" type="audio/ogg">
             Tu navegador no soporta la reproducción de audio.
         </audio>
 
         <!-- Video de la portada -->
         <video class="video-portada" autoplay muted loop>
             <source src="./inicio.mp4" type="video/mp4">
-            <source src="./inicio.webm" type="video/webm">
-            <source src="./inicio.ogv" type="video/ogg">
             Tu navegador no soporta el elemento de video.
         </video>
         
@@ -202,24 +213,25 @@
         <!-- Video que se mostrará al hacer clic en el sobre -->
         <video id="invideo" controls onended="regresarAPortada()">
             <source src="./invideo.mp4" type="video/mp4">
-            <source src="./invideo.webm" type="video/webm">
-            <source src="./invideo.ogv" type="video/ogg">
             Tu navegador no soporta el elemento de video.
         </video>
 
         <!-- Botones de confirmación y ubicación -->
         <div class="btn-container">
+            <!-- Botón para mostrar opciones de confirmación -->
             <button class="btn-icon" onclick="mostrarOpcionesConfirmacion()">
                 <img src="confirma.png" alt="Confirmación">
                 <span>Confirmación</span>
             </button>
 
+            <!-- Botón de ubicación (Google Maps) -->
             <a href="https://maps.app.goo.gl/W5vp6ZqjFCWGbPRw6" class="btn-icon" target="_blank">
                 <img src="ubi.png" alt="Ubicación">
                 <span>Ubicación</span>
             </a>
         </div>
 
+        <!-- Botones para confirmar a Nayeli o David -->
         <div id="confirmacionBtns">
             <button class="confirmacion-btn btn btn-success" onclick="confirmarA('nayeli')">Confirmar a Nayeli</button>
             <button class="confirmacion-btn btn btn-success" onclick="confirmarA('david')">Confirmar a David</button>
