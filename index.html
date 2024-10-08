@@ -23,7 +23,7 @@
 
         .sobrecom {
             position: absolute;
-            bottom: 300%;
+            bottom: 100%;
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
@@ -33,12 +33,12 @@
             transition: opacity 2s ease-in;
         }
 
-               .btn-container {
+        .btn-container {
             margin-top: 20px;
             display: flex;
-            flex-direction: column; /* Cambiado a columna para alinear verticalmente */
+            justify-content: space-between; /* Para alinear a los extremos */
             align-items: center;
-            gap: 15px; /* Espacio entre los botones */
+            gap: 15px;
         }
 
         .btn-icon {
@@ -218,13 +218,13 @@
 
         <!-- Botones de confirmación y ubicación -->
         <div class="btn-container">
-            <!-- Botón para mostrar opciones de confirmación -->
+            <!-- Botón para mostrar opciones de confirmación alineado a la izquierda -->
             <button class="btn-icon" onclick="mostrarOpcionesConfirmacion()">
                 <img src="confirma.png" alt="Confirmación">
                 <span>Confirmación</span>
             </button>
 
-            <!-- Botón de ubicación (Google Maps) -->
+            <!-- Botón de ubicación (Google Maps) alineado a la derecha -->
             <a href="https://maps.app.goo.gl/Nn4TYEj1RvETxYcG6?g_st=iw" class="btn-icon" target="_blank">
                 <img src="ubi.png" alt="Ubicación">
                 <span>Ubicación</span>
