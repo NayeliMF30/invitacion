@@ -23,7 +23,7 @@
 
         .sobrecom {
             position: absolute;
-            bottom: 20%;
+            bottom: 10%;
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
@@ -36,7 +36,7 @@
         .btn-container {
             margin-top: 20px;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
         }
 
@@ -110,6 +110,11 @@
 
             .btn-icon span {
                 font-size: 14px;
+            }
+
+            .btn-container {
+                flex-direction: column;
+                gap: 10px;
             }
 
             .confirmacion-btn {
