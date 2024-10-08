@@ -9,7 +9,7 @@
         .container {
             position: relative;
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
             text-align: center;
             padding: 0 15px;
             box-sizing: border-box;
@@ -23,20 +23,26 @@
 
         .sobrecom {
             position: absolute;
-            bottom: 100%;
+            bottom: 20%;
             left: 50%;
+            -webkit-transform: translateX(-50%);
+            -moz-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
             transform: translateX(-50%);
             width: 100%;
             max-width: 410px;
             cursor: pointer;
             opacity: 0;
+            -webkit-transition: opacity 2s ease-in;
+            -moz-transition: opacity 2s ease-in;
+            -ms-transition: opacity 2s ease-in;
             transition: opacity 2s ease-in;
         }
 
         .btn-container {
             margin-top: 20px;
             display: flex;
-            justify-content: space-between; /* Para alinear a los extremos */
+            flex-direction: column;
             align-items: center;
             gap: 15px;
         }
@@ -76,31 +82,27 @@
             cursor: pointer;
         }
 
-        /* Estilo para el botón de la bocina */
         .speaker-icon {
             position: fixed;
             top: 15px;
-            right: 45px;
+            right: 15px;
             width: 40px;
             height: 40px;
             cursor: pointer;
         }
 
-        /* Ocultar el video inicial al hacer clic en el sobre */
         #invideo {
             display: none;
             width: 100%;
         }
 
-        /* Ocultar los botones al reproducir el video */
         .btn-container.hidden, .sobrecom.hidden {
             display: none;
         }
 
-        /* Estilos responsivos */
         @media (max-width: 576px) {
             .sobrecom {
-                bottom: 30%;
+                bottom: 10%;
                 max-width: 280px;
             }
 
@@ -126,17 +128,14 @@
     </style>
 
     <script>
-        // Función para hacer aparecer la imagen del sobre
         window.onload = function() {
-            document.querySelector('.sobrecom').style.opacity = 1; // Hace visible el sobre
+            document.querySelector('.sobrecom').style.opacity = 1;
         }
 
-        // Función para mostrar los botones de confirmación
         function mostrarOpcionesConfirmacion() {
             document.getElementById('confirmacionBtns').style.display = 'block';
         }
 
-        // Función para redirigir a WhatsApp según el botón presionado y ocultar los botones
         function confirmarA(nombre) {
             document.getElementById('confirmacionBtns').style.display = 'none';
             if (nombre === 'nayeli') {
@@ -146,44 +145,31 @@
             }
         }
 
-        // Función para alternar la reproducción de música
         function toggleMusic() {
             var audio = document.getElementById('background-audio');
             var speakerIcon = document.getElementById('speakerIcon');
 
             if (audio.paused) {
                 audio.play();
-                speakerIcon.src = "sonido.jpg"; // Cambia a icono de sonido activado
+                speakerIcon.src = "sonido.jpg";
             } else {
                 audio.pause();
-                speakerIcon.src = "silencio.jpg"; // Cambia a icono de sonido desactivado
+                speakerIcon.src = "silencio.jpg";
             }
         }
 
-        // Función para reproducir el video "invideo.mp4" al hacer clic en el sobre
         function reproducirVideo() {
-            // Oculta el video de portada
             document.querySelector('.video-portada').style.display = 'none';
-
-            // Muestra el nuevo video
             document.getElementById('invideo').style.display = 'block';
             document.getElementById('invideo').play();
-
-            // Oculta los botones de Confirmación, Ubicación y la imagen del sobre
             document.querySelector('.btn-container').classList.add('hidden');
             document.querySelector('.sobrecom').classList.add('hidden');
         }
 
-        // Función que regresa al video de portada "inicio.mp4" al terminar "invideo.mp4"
         function regresarAPortada() {
-            // Ocultar el video "invideo"
             document.getElementById('invideo').style.display = 'none';
             document.getElementById('invideo').pause();
-
-            // Mostrar el video de portada de nuevo
             document.querySelector('.video-portada').style.display = 'block';
-
-            // Mostrar los botones de Confirmación y Ubicación nuevamente
             document.querySelector('.btn-container').classList.remove('hidden');
             document.querySelector('.sobrecom').classList.remove('hidden');
         }
@@ -196,42 +182,44 @@
         <img src="silencio.jpg" alt="Control de sonido" class="speaker-icon" id="speakerIcon" onclick="toggleMusic()">
 
         <!-- Reproductor de audio -->
-        <audio id="background-audio" loop>
-            <source src="cien.mp3" type="audio/mpeg">
+        <audio id="background-audio" loop controls>
+            <source src="./metallica.mp3" type="audio/mpeg">
+            <source src="./metallica.ogg" type="audio/ogg">
             Tu navegador no soporta la reproducción de audio.
         </audio>
 
         <!-- Video de la portada -->
         <video class="video-portada" autoplay muted loop>
-            <source src="Inicio.mp4" type="video/mp4">
+            <source src="./inicio.mp4" type="video/mp4">
+            <source src="./inicio.webm" type="video/webm">
+            <source src="./inicio.ogv" type="video/ogg">
             Tu navegador no soporta el elemento de video.
         </video>
         
         <!-- Imagen del sobre con efecto de aparición -->
-        <img src="sobrecom.png" alt="Sobre" class="sobrecom img-fluid" onclick="reproducirVideo()">
+        <img src="./sobrecom.png" alt="Sobre" class="sobrecom img-fluid" onclick="reproducirVideo()">
         
         <!-- Video que se mostrará al hacer clic en el sobre -->
         <video id="invideo" controls onended="regresarAPortada()">
-            <source src="invideo.mp4" type="video/mp4">
+            <source src="./invideo.mp4" type="video/mp4">
+            <source src="./invideo.webm" type="video/webm">
+            <source src="./invideo.ogv" type="video/ogg">
             Tu navegador no soporta el elemento de video.
         </video>
 
         <!-- Botones de confirmación y ubicación -->
         <div class="btn-container">
-            <!-- Botón para mostrar opciones de confirmación alineado a la izquierda -->
             <button class="btn-icon" onclick="mostrarOpcionesConfirmacion()">
                 <img src="confirma.png" alt="Confirmación">
                 <span>Confirmación</span>
             </button>
 
-            <!-- Botón de ubicación (Google Maps) alineado a la derecha -->
-            <a href="https://maps.app.goo.gl/Nn4TYEj1RvETxYcG6?g_st=iw" class="btn-icon" target="_blank">
+            <a href="https://maps.app.goo.gl/W5vp6ZqjFCWGbPRw6" class="btn-icon" target="_blank">
                 <img src="ubi.png" alt="Ubicación">
                 <span>Ubicación</span>
             </a>
         </div>
 
-        <!-- Botones para confirmar a Nayeli o David -->
         <div id="confirmacionBtns">
             <button class="confirmacion-btn btn btn-success" onclick="confirmarA('nayeli')">Confirmar a Nayeli</button>
             <button class="confirmacion-btn btn btn-success" onclick="confirmarA('david')">Confirmar a David</button>
