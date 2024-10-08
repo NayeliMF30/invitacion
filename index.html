@@ -11,19 +11,16 @@
             width: 100%;
             max-width: 600px;
             text-align: center;
-            padding: 0 15px;
-            box-sizing: border-box;
         }
 
         .video-portada {
             display: block;
             width: 100%;
-            height: auto;
         }
 
         .sobrecom {
             position: absolute;
-            bottom: 20%; /* Ajustado para que quede centrado */
+            bottom: 250px;
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
@@ -36,9 +33,7 @@
         .btn-container {
             margin-top: 20px;
             display: flex;
-            flex-direction: column; /* Cambiado a columna para alinear verticalmente */
-            align-items: center;
-            gap: 15px; /* Espacio entre los botones */
+            justify-content: space-around;
         }
 
         .btn-icon {
@@ -52,16 +47,15 @@
         }
 
         .btn-icon img {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
+            width: 50px;
+            height: 45px;
         }
 
         .btn-icon span {
             margin-top: 5px;
             font-style: italic;
             color: black;
-            font-size: 18px;
+            font-size: 20px;
         }
 
         #confirmacionBtns {
@@ -76,15 +70,19 @@
             cursor: pointer;
         }
 
-        /* Estilo para el botón de la bocina */
         .speaker-icon {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-        }
+    position: fixed;
+    top: 10px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    opacity: 0.5; /* Ajusta la transparencia, 1 es opaco y 0 es completamente transparente */
+}
+
+.speaker-icon:hover {
+    opacity: 1; /* Para que el botón se vea completamente opaco cuando se pasa el cursor por encima */
+}
 
         /* Ocultar el video inicial al hacer clic en el sobre */
         #invideo {
@@ -95,33 +93,6 @@
         /* Ocultar los botones al reproducir el video */
         .btn-container.hidden, .sobrecom.hidden {
             display: none;
-        }
-
-        /* Estilos responsivos */
-        @media (max-width: 576px) {
-            .sobrecom {
-                bottom: 10%;
-                max-width: 280px;
-            }
-
-            .btn-icon img {
-                width: 30px;
-                height: 30px;
-            }
-
-            .btn-icon span {
-                font-size: 14px;
-            }
-
-            .btn-container {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .confirmacion-btn {
-                padding: 8px 16px;
-                font-size: 14px;
-            }
         }
     </style>
 
@@ -197,22 +168,22 @@
 
         <!-- Reproductor de audio -->
         <audio id="background-audio" loop>
-            <source src="./cien.mp3" type="audio/mpeg">
+            <source src="metallica.mp3" type="audio/mpeg">
             Tu navegador no soporta la reproducción de audio.
         </audio>
 
         <!-- Video de la portada -->
         <video class="video-portada" autoplay muted loop>
-            <source src="./inicio.mp4" type="video/mp4">
+            <source src="inicio.mp4" type="video/mp4">
             Tu navegador no soporta el elemento de video.
         </video>
         
         <!-- Imagen del sobre con efecto de aparición -->
-        <img src="./sobrecom.png" alt="Sobre" class="sobrecom img-fluid" onclick="reproducirVideo()">
+        <img src="sobrecom.png" alt="Sobre" class="sobrecom img-fluid" onclick="reproducirVideo()">
         
         <!-- Video que se mostrará al hacer clic en el sobre -->
         <video id="invideo" controls onended="regresarAPortada()">
-            <source src="./invideo.mp4" type="video/mp4">
+            <source src="invideo.mp4" type="video/mp4">
             Tu navegador no soporta el elemento de video.
         </video>
 
@@ -226,7 +197,7 @@
 
             <!-- Botón de ubicación (Google Maps) -->
             <a href="https://maps.app.goo.gl/W5vp6ZqjFCWGbPRw6" class="btn-icon" target="_blank">
-                <img src="ubi.png" alt="Ubicación">
+                <img src="ubi(1).png" alt="Ubicación">
                 <span>Ubicación</span>
             </a>
         </div>
