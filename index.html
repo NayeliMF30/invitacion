@@ -147,10 +147,10 @@
 
             if (audio.paused) {
                 audio.play();
-                speakerIcon.src = "sonido.jpg"; // Cambia a icono de sonido activado
+                speakerIcon.src = "sonido.png"; // Cambia a icono de sonido activado
             } else {
                 audio.pause();
-                speakerIcon.src = "silencio.jpg"; // Cambia a icono de sonido desactivado
+                speakerIcon.src = "silencio.png"; // Cambia a icono de sonido desactivado
             }
         }
 
@@ -201,7 +201,7 @@
     <div class="container">
         <!-- Botón de audio mejorado -->
         <button class="btn-audio" onclick="toggleMusic()">
-            <img src="silencio.jpg" alt="Control de sonido" class="speaker-icon" id="speakerIcon">
+            <img src="silencio.png" alt="Control de sonido" class="speaker-icon" id="speakerIcon">
         </button>
 
         <!-- Reproductor de audio -->
